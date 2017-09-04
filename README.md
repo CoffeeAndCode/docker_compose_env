@@ -15,8 +15,7 @@ for a production solution for service discovery, this is _not_ what you want.
 
 ## Installation / Usage
 
-In it's simpliest form, add this gem to your Rails app's Gemfile in the
-development / test groups and specify the path to the Rails bootstrapper.
+For a Rails app, add this gem to your Gemfile in the development / test groups.
 
 ```ruby
 group :development, :test do
@@ -24,12 +23,78 @@ group :development, :test do
 end
 ```
 
-And then execute:
+You will now have new `ENV` properties set from the `docker-compose.yml` file
+in your project directory. The following compose config would assign
+`ENV['DB_HOST']` and `ENV['DB_PORT_5432']` to the values returned
+from running `docker-compose port db 5432`, the host and dynamically mapped
+port assigned after you ran `docker-compose up`.
 
-    $ bundle
+```yaml
+version: '3.3'
 
-- update database configuration
-- show example docker-compose.yml file
+services:
+  db:
+    image: postgres:9.6-alpine
+    env_file: .env
+    ports:
+      - "5432"
+```
+
+That means your Rails `config/database.yml` file could look like:
+
+```yaml
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: <%= ENV['DB_HOST'].to_i %>
+  password: example
+  pool: 5
+  port: <%= ENV['DB_PORT_5432'].to_i %>
+  username: postgres
+
+development:
+  <<: *default
+  database: app
+
+test:
+  <<: *default
+  database: app_test
+```
+
+### Load Faster!
+
+If you need to load the dynamic port information faster than the
+`before_configuration` call in `Railties`, you can add the `docker_compose_env`
+gem higher up in the `Gemfile` and load it with a special require path:
+
+```ruby
+gem `docker_compose_env`, require: 'docker_compose_env/now'
+```
+
+### Further Customization
+
+Unfortunately, there's only so much automagic that can be done. If you need to
+customize the `docker-compose.yml` file name or location, or if you'd like to
+collect the dynamic information somewhere besides `ENV`, you will need to
+require the `docker_compose_env` gem and set it up yourself.
+
+```ruby
+# expects docker-compose.yml file and adds values to ENV
+DockerComposeEnv.setup!
+
+# customize docker-compose.yml path and adds values to ENV
+DockerComposeEnv.setup!(file: 'docker/docker-compose.dev.yml')
+
+# add dynamic values to custom object instead of ENV
+config = {}
+DockerComposeEnv.setup!(env: config)
+puts config
+
+# add dynamic values to custom object instead of ENV and custom compose path
+config = {}
+DockerComposeEnv.setup!(env: config, file: 'custom/path.yml')
+puts config
+```
 
 
 ## Development

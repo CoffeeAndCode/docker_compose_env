@@ -40,5 +40,7 @@ module DockerComposeEnv
         end
       end
     end
+  rescue Errno::ENOENT => exception
+    raise exception unless exception.message == 'No such file or directory - docker-compose'
   end
 end

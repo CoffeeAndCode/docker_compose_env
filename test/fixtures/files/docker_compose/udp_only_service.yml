@@ -2,7 +2,7 @@ version: '3.3'
 
 services:
   postgres:
-    image: postgres:9.6-alpine
+    build: .
     environment:
       POSTGRES_DB: example_app
       POSTGRES_PASSWORD: password

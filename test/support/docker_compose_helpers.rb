@@ -21,7 +21,7 @@ module DockerComposeHelpers
   end
 
   def self.up(config_file)
-    command = "docker-compose --file=#{config_file} up --remove-orphans -d"
+    command = "docker-compose --file=#{config_file} up --build --remove-orphans -d"
     output, status = Open3.capture2e(command)
     print output, "\n" unless status.success?
   end

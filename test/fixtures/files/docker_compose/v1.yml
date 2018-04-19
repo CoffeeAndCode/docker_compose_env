@@ -1,6 +1,6 @@
 services:
   converter:
-    image: zrrrzzt/docker-unoconv-webservice:4.7.3
+    build: .
     network_mode: bridge
     ports:
     - 3000/tcp
@@ -9,7 +9,7 @@ services:
     environment:
       MYSQL_DATABASE: example_app
       MYSQL_ROOT_PASSWORD: password
-    image: mysql:8
+    build: .
     network_mode: bridge
     ports:
     - 3306/tcp
@@ -17,7 +17,7 @@ services:
     environment:
       POSTGRES_DB: example_app
       POSTGRES_PASSWORD: password
-    image: postgres:9.6-alpine
+    build: .
     network_mode: bridge
     ports:
     - 5432/tcp

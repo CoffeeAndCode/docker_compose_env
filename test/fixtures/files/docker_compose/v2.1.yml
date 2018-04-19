@@ -1,6 +1,6 @@
 services:
   converter:
-    image: zrrrzzt/docker-unoconv-webservice:4.7.3
+    build: .
     ports:
     - 3000/tcp
     - 6060/udp
@@ -8,14 +8,14 @@ services:
     environment:
       MYSQL_DATABASE: example_app
       MYSQL_ROOT_PASSWORD: password
-    image: mysql:8
+    build: .
     ports:
     - 3306/tcp
   postgres:
     environment:
       POSTGRES_DB: example_app
       POSTGRES_PASSWORD: password
-    image: postgres:9.6-alpine
+    build: .
     ports:
     - 5432/tcp
 version: '2.1'

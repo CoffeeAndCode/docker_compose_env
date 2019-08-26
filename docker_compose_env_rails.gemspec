@@ -23,5 +23,5 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_dependency 'docker_compose_env', DockerComposeEnv::VERSION
-  spec.add_dependency 'railties', '>= 3.2', '< 6'
+  spec.add_dependency 'railties', '>= 3.2'
 end

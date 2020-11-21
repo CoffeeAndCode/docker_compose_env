@@ -35,7 +35,7 @@ class DockerComposeEnvTest < Minitest::Test
       DockerComposeEnv.setup!(env: {}, file: config, process_env: { 'PATH' => '' })
     end
 
-    assert_equal "No such file or directory - docker-compose\n", err
+    assert_equal '', err
   end
 
   def test_will_only_set_one_env_per_host_and_one_per_port

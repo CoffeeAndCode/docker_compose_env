@@ -49,10 +49,6 @@ module DockerComposeEnv
       end
     end
   rescue Errno::ENOENT => exception
-    if exception.message == 'No such file or directory - docker-compose'
-      $stderr.puts(exception.message)
-    else
-      raise exception
-    end
+    raise exception unless exception.message == 'No such file or directory - docker-compose'
   end
 end

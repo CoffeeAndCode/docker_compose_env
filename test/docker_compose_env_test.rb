@@ -29,6 +29,15 @@ class DockerComposeEnvTest < Minitest::Test
     assert_equal '', error.message
   end
 
+  def test_will_not_raise_error_if_docker_compose_not_found
+    config = file_fixture('docker_compose/v3.3.yml')
+    _, err = capture_io do
+      DockerComposeEnv.setup!(env: {}, file: config, process_env: { 'PATH' => '' })
+    end
+
+    assert_equal "No such file or directory - docker-compose\n", err
+  end
+
   def test_will_only_set_one_env_per_host_and_one_per_port
     config = file_fixture('docker_compose/v3.3.yml')
     with_docker_compose(config) do |config_file, env|

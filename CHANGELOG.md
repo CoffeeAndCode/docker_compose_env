@@ -5,6 +5,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [unreleased]
 
+### Added
+
+- Add test that shows docker-compose not found message on stderr
+
 ### Changed
 
 - Update ruby for development to 2.7.2

@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Bump rake version dependency for devlopment
 - Update to latest Bundler gem version on Travis CI
 - Use latest docker-compose version on Travis CI
+- No longer show message on stdout if docker-compose command is not found
 
 ## [0.1.2] - 2019-08-26
 

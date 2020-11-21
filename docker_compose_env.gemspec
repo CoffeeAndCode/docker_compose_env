@@ -25,7 +25,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_development_dependency 'bundler', '~> 2.0'
-  spec.add_development_dependency 'rake', '~> 12.0'
+  spec.add_development_dependency 'rake', '~> 13.0'
   spec.add_development_dependency 'reek'
   spec.add_development_dependency 'rubocop'
   spec.add_development_dependency 'minitest', '~> 5.10'

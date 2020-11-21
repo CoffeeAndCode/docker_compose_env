@@ -5,6 +5,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [unreleased]
 
+### Changed
+
+- Update ruby for development to 2.7.2
+- Bump rake version dependency for devlopment
+- Update to latest Bundler gem version on Travis CI
+- Use latest docker-compose version on Travis CI
+
 ## [0.1.2] - 2019-08-26
 
 ### Added

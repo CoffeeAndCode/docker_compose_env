@@ -1,4 +1,5 @@
 require 'docker_compose_env/version'
+require 'open3'
 require 'yaml'
 
 # The main module for DockerComposeEnv, this provides a single "easy mode"

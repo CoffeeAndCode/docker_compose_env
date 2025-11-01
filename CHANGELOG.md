@@ -5,6 +5,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [unreleased]
 
+## [1.0.0] - 2025-11-01
+
+### Added
+
+- Support podman-compose responses to find active ports
+- Add development environment support for nix
+
+### Changed
+
+- Simplifed gemspec files for current pass at nix dev environment
+- Adjusted broken tests which were no longer respecting default Text class adjustments
+
 ## [0.2.1] - 2020-12-03
 
 ### Changed

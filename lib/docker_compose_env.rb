@@ -21,13 +21,13 @@ module DockerComposeEnv
             wait_thr.value
           end
 
-          if (compose_port_info =~ /^0\.0\.0\.0\:\d+\s*$/) == 0
+          if (compose_port_info =~ /^(0\.0\.0\.0\:)?\d+\s*$/) == 0
             if env["#{service_name.upcase}_HOST"].nil?
               env["#{service_name.upcase}_HOST"] = '0.0.0.0'
             end
 
             if env["#{service_name.upcase}_PORT_#{parsed_port}_UDP"].nil?
-              env["#{service_name.upcase}_PORT_#{parsed_port}_UDP"] = compose_port_info.gsub(/0\.0\.0\.0:(\d+)\s*/, '\1')
+              env["#{service_name.upcase}_PORT_#{parsed_port}_UDP"] = compose_port_info.gsub('0.0.0.0:', '').gsub(/(\d+)\s*/, '\1')
             end
           end
         else
@@ -37,13 +37,14 @@ module DockerComposeEnv
             wait_thr.value
           end
 
-          if (compose_port_info =~ /^0\.0\.0\.0\:\d+\s*$/) == 0
+          # podman-compose appears to return as "44577\n" w/out 0.0.0.0:44577
+          if (compose_port_info =~ /^(0\.0\.0\.0\:)?\d+\s*$/) == 0
             if env["#{service_name.upcase}_HOST"].nil?
               env["#{service_name.upcase}_HOST"] = '0.0.0.0'
             end
 
             if env["#{service_name.upcase}_PORT_#{container_port}"].nil?
-              env["#{service_name.upcase}_PORT_#{container_port}"] = compose_port_info.gsub(/0\.0\.0\.0:(\d+)\s*/, '\1')
+              env["#{service_name.upcase}_PORT_#{container_port}"] = compose_port_info.gsub('0.0.0.0', '').gsub(/(\d+)\s*/, '\1')
             end
           end
         end

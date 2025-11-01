@@ -1,12 +1,8 @@
 # coding: utf-8
 
-lib = File.expand_path('../lib', __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'docker_compose_env/version'
-
 Gem::Specification.new do |spec|
   spec.name = 'docker_compose_env_rails'
-  spec.version = DockerComposeEnv::VERSION
+  spec.version = '1.0.0'
   spec.authors = ['Jonathan Knapp']
   spec.email = ['jon@coffeeandcode.com']
 
@@ -22,6 +18,6 @@ Gem::Specification.new do |spec|
   spec.executables = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'docker_compose_env', DockerComposeEnv::VERSION
-  spec.add_dependency 'railties', '>= 3.2'
+  spec.add_dependency 'docker_compose_env', '1.0.0'
+  spec.add_dependency 'railties'
 end

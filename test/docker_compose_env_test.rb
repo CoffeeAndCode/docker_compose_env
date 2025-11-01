@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class DockerComposeEnvTest < Minitest::Test
+class DockerComposeEnvTest < BaseTest
   def test_that_it_has_a_version_number
     refute_nil ::DockerComposeEnv::VERSION
   end

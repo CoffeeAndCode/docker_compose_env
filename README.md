@@ -108,6 +108,21 @@ release a new version, update the version number in `version.rb`, and then run
 `bundle exec rake release`, which will create a git tag for the version, push
 git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
+If using nix & direnv, you can change to the project directory and `direnv allow`.
+
+To generate a `Gemfile.lock`, you should first run:
+
+`nix run .#bundler -- config set --local force_ruby_platform 1` to simplify nix setup.
+
+Then you can run:
+
+```sh
+nix run .#bundler -- lock
+git add -f Gemfile.lock
+nix run .#bundix
+git add gemset.nix
+direnv reload
+```
 
 ## Contributing
 

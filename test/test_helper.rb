@@ -4,13 +4,11 @@ require 'minitest/autorun'
 require_relative 'support/docker_compose_helpers'
 require_relative 'support/fixtures'
 
-module MiniTest
-  class Test
-    include DockerComposeHelpers
-    include Fixtures
+class BaseTest < Minitest::Test
+  include DockerComposeHelpers
+  include Fixtures
 
-    Fixtures.file_fixture_path = 'test/fixtures/files'
-  end
+  Fixtures.file_fixture_path = 'test/fixtures/files'
 end
 
 Minitest.after_run do
